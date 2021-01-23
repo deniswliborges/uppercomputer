@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.deniswillian.uppercomputer.domain.Projeto;
 
 //@Repository
-public interface ProjetoRepository extends JpaRepository<Projeto, Integer> {
+public interface ProjetoRepository  {
 
 }

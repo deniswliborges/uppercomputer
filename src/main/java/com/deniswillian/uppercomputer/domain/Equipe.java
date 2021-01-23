@@ -2,6 +2,7 @@ package com.deniswillian.uppercomputer.domain;
 
 import java.io.Serializable;
 
+
 public class Equipe implements Serializable {
 	private static final long serialVersionUID = 1L;
 

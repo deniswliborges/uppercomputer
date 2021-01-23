@@ -1,5 +1,37 @@
 package com.deniswillian.uppercomputer.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.deniswillian.uppercomputer.domain.Cargo;
+import com.deniswillian.uppercomputer.dto.CargoDTO;
+import com.deniswillian.uppercomputer.services.CargoService;
+
+@RestController
+@RequestMapping(value = "/cargos")
 public class CargoResource {
+
+	@Autowired
+	private CargoService cargoService;
+
+	@RequestMapping(value = "/{cd_cargo}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer cd_cargo) {
+		Cargo obj = cargoService.find(cd_cargo);
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET )
+	public ResponseEntity<List<CargoDTO>>findAll(){
+		List<Cargo> list = cargoService.findAll();
+		List<CargoDTO> listDto = list.stream().map(obj -> new CargoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
 
 }

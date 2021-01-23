@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.deniswillian.uppercomputer.domain.Funcionario;
-import com.deniswillian.uppercomputer.exceptions.ObjectNotFounfException;
+import com.deniswillian.uppercomputer.exceptions.ObjectNotFoundException;
 import com.deniswillian.uppercomputer.repositories.FuncionarioRepository;
 
 @Service
@@ -19,7 +19,7 @@ public class FuncionarioService {
 	
 	public Funcionario find(Integer cd_func) {
 		Optional<Funcionario>obj = repo.findById(cd_func);
-		return obj.orElseThrow(() -> new ObjectNotFounfException(
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + cd_func + ", Tipo: " + Funcionario.class.getName()));
 	}
 	
