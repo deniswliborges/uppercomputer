@@ -48,5 +48,13 @@ public class CargoResource {
 		return ResponseEntity.created(uri).build();
 
 	}
+	@RequestMapping(value = "/{cd_cargo}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody CargoDTO objDto, @PathVariable Integer cd_cargo){
+		Cargo obj = cargoService.fromDTO(objDto);
+		obj.setCd_cargo(cd_cargo);
+		obj = cargoService.update(obj);
+		return ResponseEntity.noContent().build();
+		
+	}
 
 }
