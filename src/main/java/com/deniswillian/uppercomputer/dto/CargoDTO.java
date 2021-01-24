@@ -8,34 +8,34 @@ import com.deniswillian.uppercomputer.domain.Cargo;
 
 public class CargoDTO {
 
-	private Integer id;
+	private Integer cd_cargo;
 
 	@NotEmpty(message = "Prenchimento Obrigatório")
 	@Length(min = 3, max = 80, message = "O tamanho deve ser entre 3 a 80 caracteres!")
-	private String nome;
+	private String nm_cargo;
 
 	public CargoDTO() {
 	}
 
 	public CargoDTO(Cargo obj) {
-		id = obj.getCd_cargo();
-		nome = obj.getNm_cargo();
+		cd_cargo = obj.getCd_cargo();
+		nm_cargo = obj.getNm_cargo();
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCd_cargo() {
+		return cd_cargo;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCd_cargo(Integer cd_cargo) {
+		this.cd_cargo = cd_cargo;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNm_cargo() {
+		return nm_cargo;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNm_cargo(String nm_cargo) {
+		this.nm_cargo = nm_cargo;
 	}
 
 }

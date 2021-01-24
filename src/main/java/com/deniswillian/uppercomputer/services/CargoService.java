@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deniswillian.uppercomputer.domain.Cargo;
+import com.deniswillian.uppercomputer.dto.CargoDTO;
 import com.deniswillian.uppercomputer.exceptions.ObjectNotFoundException;
 import com.deniswillian.uppercomputer.repositories.CargoRepository;
 
@@ -22,9 +23,17 @@ public class CargoService {
 				"Objeto não encontrado! Id: " + cd_cargo + ", Tipo: " + Cargo.class.getName()));
 	}
 
+	public Cargo insert(Cargo obj) {
+		obj.setCd_cargo(null);
+		return cargoRepository.save(obj);
+	}
+
 	public List<Cargo> findAll() {
 		return cargoRepository.findAll();
 
 	}
 
+	public Cargo fromDTO(CargoDTO objDto) {
+		return new Cargo(objDto.getCd_cargo(), objDto.getNm_cargo());
+	}
 }
