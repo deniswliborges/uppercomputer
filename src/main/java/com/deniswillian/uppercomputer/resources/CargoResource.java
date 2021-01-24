@@ -48,13 +48,20 @@ public class CargoResource {
 		return ResponseEntity.created(uri).build();
 
 	}
+
 	@RequestMapping(value = "/{cd_cargo}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody CargoDTO objDto, @PathVariable Integer cd_cargo){
+	public ResponseEntity<Void> update(@Valid @RequestBody CargoDTO objDto, @PathVariable Integer cd_cargo) {
 		Cargo obj = cargoService.fromDTO(objDto);
 		obj.setCd_cargo(cd_cargo);
 		obj = cargoService.update(obj);
 		return ResponseEntity.noContent().build();
-		
+
+	}
+
+	@RequestMapping(value = "/{cd_cargo}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer cd_cargo) {
+		cargoService.delete(cd_cargo);
+		return ResponseEntity.noContent().build();
 	}
 
 }
