@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.deniswillian.uppercomputer.enums.TipoFuncionario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -25,18 +26,20 @@ public class Funcionario implements Serializable {
 
 	private String nm_func;
 
-	// @Column(unique=true)
+	
 	private String rg_fun;
 
-	// @Column(unique=true)
+	
 	private String cpf_func;
 
-	// @Column(unique=true)
+	
 	private String email_func;
 
 	private double salario;
 
 	private String senha;
+	
+	private Integer tipo;
 
 	@JsonBackReference
 	@ManyToOne
@@ -57,7 +60,7 @@ public class Funcionario implements Serializable {
 	 */
 
 	public Funcionario(Integer cd_func, String nm_func, String rg_fun, String cpf_func, String email_func,
-			double salario, String senha, Cargo cargo) {
+			double salario, String senha, TipoFuncionario tipo) {
 		super();
 		this.cd_func = cd_func;
 		this.nm_func = nm_func;
@@ -66,8 +69,10 @@ public class Funcionario implements Serializable {
 		this.email_func = email_func;
 		this.salario = salario;
 		this.senha = senha;
-		this.cargo = cargo;
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
+
+	
 
 	public Integer getCd_func() {
 		return cd_func;
@@ -146,6 +151,14 @@ public class Funcionario implements Serializable {
 		this.cargo = cargo;
 	}
 
+	public TipoFuncionario getTipo() {
+		return TipoFuncionario.toEnum(tipo);
+	}
+
+	public void setTipo(TipoFuncionario tipo) {
+		this.tipo = tipo.getCod();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -170,5 +183,7 @@ public class Funcionario implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 }

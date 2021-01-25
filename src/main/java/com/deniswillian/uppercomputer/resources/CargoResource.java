@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
 import com.deniswillian.uppercomputer.domain.Cargo;
 import com.deniswillian.uppercomputer.dto.CargoDTO;
 import com.deniswillian.uppercomputer.services.CargoService;
@@ -33,13 +32,6 @@ public class CargoResource {
 	public ResponseEntity<?> find(@PathVariable Integer cd_cargo) {
 		Cargo obj = cargoService.find(cd_cargo);
 		return ResponseEntity.ok().body(obj);
-	}
-
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<CargoDTO>> findAll() {
-		List<Cargo> list = cargoService.findAll();
-		List<CargoDTO> listDto = list.stream().map(obj -> new CargoDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -66,12 +58,17 @@ public class CargoResource {
 		cargoService.delete(cd_cargo);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
-	//Paginação Exemplo - /cargos/page?linesPerPage=3&page=1&direction=ASC
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CargoDTO>> findAll() {
+		List<Cargo> list = cargoService.findAll();
+		List<CargoDTO> listDto = list.stream().map(obj -> new CargoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+
+	// Paginação Exemplo - /cargos/page?linesPerPage=3&page=1&direction=ASC
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
-	public ResponseEntity<Page<CargoDTO>> findPage(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
+	public ResponseEntity<Page<CargoDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
@@ -79,7 +76,5 @@ public class CargoResource {
 		Page<CargoDTO> listDto = list.map(obj -> new CargoDTO(obj));
 		return ResponseEntity.ok().body(listDto);
 	}
-	
-	
 
 }

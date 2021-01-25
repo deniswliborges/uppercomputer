@@ -2,13 +2,16 @@ package com.deniswillian.uppercomputer.dto;
 
 
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.deniswillian.uppercomputer.domain.Cargo;
 
-public class CargoDTO {
+public class CargoDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Integer cd_cargo;
 

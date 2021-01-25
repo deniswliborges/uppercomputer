@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.deniswillian.uppercomputer.domain.Cargo;
 import com.deniswillian.uppercomputer.domain.Funcionario;
+import com.deniswillian.uppercomputer.enums.TipoFuncionario;
 import com.deniswillian.uppercomputer.repositories.CargoRepository;
 import com.deniswillian.uppercomputer.repositories.FuncionarioRepository;
 
@@ -45,19 +46,19 @@ public class UppercomputerApplication implements CommandLineRunner {
 		
 
 		Funcionario f1 = new Funcionario(null, "Denis Willian", "96458754-x", "548657459-41", "denis@gmail.com",
-				6500.00, "123", c1);
+				6500.00, "123",TipoFuncionario.DESENVOLVEDOR );
 		f1.getTelefones().addAll(Arrays.asList("963254456", "56215547"));
 
 		Funcionario f2 = new Funcionario(null, "Michel Gonçalves", "56985471-0", "451230562-47", "Michel@gmail.com",
-				10800.00, "123", c2);
+				10800.00, "123", TipoFuncionario.ANAL_BANCO_DADOS);
 		f2.getTelefones().addAll(Arrays.asList("915246600", "45963522"));
 
 		Funcionario f3 = new Funcionario(null, "David Cayuella", "02354209-6", "548625419-12", "david@gmail", 4500.00,
-				"123", c3);
+				"123", TipoFuncionario.ANAL_NEGOCIO);
 		f3.getTelefones().addAll(Arrays.asList("962110455"));
 
 		Funcionario f4 = new Funcionario(null, "Andre Martins", "52145236-8", "478563256-52", "andre@gmail", 7250.00,
-				"123", c4);
+				"123", TipoFuncionario.GER_PROJETO);
 		f4.getTelefones().addAll(Arrays.asList("962110455"));
 
 		c1.getFuncionarios().addAll(Arrays.asList(f1));
