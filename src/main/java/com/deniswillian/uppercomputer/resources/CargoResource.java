@@ -7,13 +7,16 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 
 import com.deniswillian.uppercomputer.domain.Cargo;
 import com.deniswillian.uppercomputer.dto.CargoDTO;
@@ -63,5 +66,20 @@ public class CargoResource {
 		cargoService.delete(cd_cargo);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
+	//Paginação Exemplo - /cargos/page?linesPerPage=3&page=1&direction=ASC
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	public ResponseEntity<Page<CargoDTO>> findPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+		Page<Cargo> list = cargoService.findPage(page, linesPerPage, orderBy, direction);
+		Page<CargoDTO> listDto = list.map(obj -> new CargoDTO(obj));
+		return ResponseEntity.ok().body(listDto);
+	}
+	
+	
 
 }

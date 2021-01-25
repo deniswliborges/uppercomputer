@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.deniswillian.uppercomputer.domain.Cargo;
@@ -43,19 +46,25 @@ public class CargoService {
 	public void delete(Integer cd_cargo) {
 		find(cd_cargo);
 		try {
-		cargoRepository.deleteById(cd_cargo);
-		}
-		catch(DataIntegrityViolationException e) {
+			cargoRepository.deleteById(cd_cargo);
+		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir um Cargo que possui Funcionarios!");
 		}
 	}
-	
+
 	public List<Cargo> findAll() {
 		return cargoRepository.findAll();
+
+	}
+	public Page<Cargo> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return cargoRepository.findAll(pageRequest);
 
 	}
 
 	public Cargo fromDTO(CargoDTO objDto) {
 		return new Cargo(objDto.getCd_cargo(), objDto.getNm_cargo());
 	}
+
+	
 }

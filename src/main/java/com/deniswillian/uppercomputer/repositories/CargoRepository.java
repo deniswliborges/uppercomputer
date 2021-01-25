@@ -12,5 +12,5 @@ import com.deniswillian.uppercomputer.domain.Cargo;
 public interface CargoRepository  extends JpaRepository<Cargo, Integer>{
 
 	//@Transactional(readOnly=true)
-	//public List<Cargo> findAllByOrderByNome();
+	//public List<Cargo> findByCd_cargo(Integer cd_cargo);
 }

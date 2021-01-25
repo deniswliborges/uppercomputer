@@ -38,6 +38,11 @@ public class UppercomputerApplication implements CommandLineRunner {
 		Cargo c2 = new Cargo(null, "DBA");
 		Cargo c3 = new Cargo(null, "BI");
 		Cargo c4 = new Cargo(null, "MANAGER PROJECT");
+		Cargo c5 = new Cargo(null,"FIELFD SERVICE");
+		Cargo c6 = new Cargo(null,"SECURITY");
+		Cargo c7 = new Cargo(null,"SQUAD");
+		Cargo c8 = new Cargo(null,"MARKET");
+		
 
 		Funcionario f1 = new Funcionario(null, "Denis Willian", "96458754-x", "548657459-41", "denis@gmail.com",
 				6500.00, "123", c1);
@@ -60,7 +65,7 @@ public class UppercomputerApplication implements CommandLineRunner {
 		c3.getFuncionarios().addAll(Arrays.asList(f3));
 		c4.getFuncionarios().addAll(Arrays.asList(f4));
 
-		cargoRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
+		cargoRepository.saveAll(Arrays.asList(c1, c2, c3, c4,c5,c6,c7,c8));
 		funcionarioRepository.saveAll(Arrays.asList(f1, f2, f3, f4));
 
 	}
