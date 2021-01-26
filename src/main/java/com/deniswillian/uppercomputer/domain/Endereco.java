@@ -3,36 +3,47 @@ package com.deniswillian.uppercomputer.domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Endereco implements Serializable {
+public class Endereco implements Serializable{	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private Integer id;
-
 	private String logradouro;
 	private String numero;
+	private String complemento;
 	private String bairro;
-
-	// @Column(unique=true)
 	private String cep;
-
-	// @JsonIgnore
-	// @OneToOne(cascade=CascadeType.ALL,mappedBy="endereco")
-	// private Funcionario funcionario;
-
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="funcionario_id")
+	private Funcionario funcionario;
+	
+	
+	
 	public Endereco() {
 	}
 
-	public Endereco(Integer id, String logradouro, String numero, String bairro, String cep) {
+	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
+			Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
 		this.numero = numero;
+		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cep = cep;
+		this.funcionario = funcionario;
+		
 	}
 
 	public Integer getId() {
@@ -59,6 +70,14 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 	}
 
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
 	public String getBairro() {
 		return bairro;
 	}
@@ -75,13 +94,15 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 
-	/*
-	 * public Funcionario getFuncionario() { return funcionario; }
-	 * 
-	 * 
-	 * public void setFuncionario(Funcionario funcionario) { this.funcionario =
-	 * funcionario; }
-	 */
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	
 
 	@Override
 	public int hashCode() {
@@ -107,5 +128,7 @@ public class Endereco implements Serializable {
 			return false;
 		return true;
 	}
-
+	
+	
+	
 }

@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
-import com.deniswillian.uppercomputer.domain.Funcionario;
 import com.deniswillian.uppercomputer.domain.Funcionario;
 import com.deniswillian.uppercomputer.dto.FuncionarioDTO;
-import com.deniswillian.uppercomputer.dto.FuncionarioDTO;
+import com.deniswillian.uppercomputer.dto.FuncionarioNewDTO;
 import com.deniswillian.uppercomputer.services.FuncionarioService;
 
 @RestController
@@ -37,24 +35,15 @@ public class FuncionarioResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
-	/*
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<FuncionarioDTO>> findAll() {
-		List<Funcionario> list = funcionarioService.findAll();
-		List<FuncionarioDTO> listDto = list.stream().map(obj -> new FuncionarioDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
-	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void>insert(@Valid @RequestBody FuncionarioDTO objDto){
-		Funcionario obj = funcionarioService.fromDto(objDto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cd_func}").buildAndExpand(obj.getCd_func())
-				.toUri();
+	public ResponseEntity<Void> insert(@Valid @RequestBody FuncionarioNewDTO objDto) {
+		Funcionario obj = funcionarioService.fromDTO(objDto);
+		obj = funcionarioService.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cd_func}").buildAndExpand(obj.getCd_func()).toUri();
 		return ResponseEntity.created(uri).build();
+
 	}
-	*/
-	
-	// ==========================================================================================
 	
 	@RequestMapping(value = "/{cd_func}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody FuncionarioDTO objDto, @PathVariable Integer cd_func) {

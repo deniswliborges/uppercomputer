@@ -1,7 +1,5 @@
 package com.deniswillian.uppercomputer.dto;
 
-
-
 import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;

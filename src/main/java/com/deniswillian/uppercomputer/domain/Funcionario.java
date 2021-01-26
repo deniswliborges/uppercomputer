@@ -1,10 +1,14 @@
 package com.deniswillian.uppercomputer.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 
 import com.deniswillian.uppercomputer.enums.TipoFuncionario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Funcionario implements Serializable {
@@ -32,14 +39,22 @@ public class Funcionario implements Serializable {
 	
 	private String cpf_func;
 
-	
+	@Column(unique=true)
 	private String email_func;
 
 	private double salario;
 
+	@JsonIgnore
 	private String senha;
 	
+	private String logradouro;
+	private String numero;
+	private String complemento;
+	private String bairro;
+	private String cep;
+	
 	private Integer tipo;
+	
 
 	@JsonBackReference
 	@ManyToOne
@@ -60,7 +75,8 @@ public class Funcionario implements Serializable {
 	 */
 
 	public Funcionario(Integer cd_func, String nm_func, String rg_fun, String cpf_func, String email_func,
-			double salario, String senha, TipoFuncionario tipo) {
+			double salario, String senha, String logradouro, String numero, String complemento, String bairro, String cep,
+			Cargo cargo,TipoFuncionario tipo) {
 		super();
 		this.cd_func = cd_func;
 		this.nm_func = nm_func;
@@ -69,7 +85,14 @@ public class Funcionario implements Serializable {
 		this.email_func = email_func;
 		this.salario = salario;
 		this.senha = senha;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.cargo = cargo;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
+		
 	}
 
 	
@@ -136,13 +159,48 @@ public class Funcionario implements Serializable {
 
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
+	}	
+
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	/*
-	 * public Endereco getEndereco() { return endereco; }
-	 * 
-	 * public void setEndereco(Endereco endereco) { this.endereco = endereco; }
-	 */
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
 	public Cargo getCargo() {
 		return cargo;
 	}

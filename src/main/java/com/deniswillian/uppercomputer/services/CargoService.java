@@ -56,6 +56,7 @@ public class CargoService {
 		return cargoRepository.findAll();
 
 	}
+
 	public Page<Cargo> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return cargoRepository.findAll(pageRequest);
@@ -66,5 +67,4 @@ public class CargoService {
 		return new Cargo(objDto.getCd_cargo(), objDto.getNm_cargo());
 	}
 
-	
 }

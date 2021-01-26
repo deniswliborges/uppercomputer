@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Cargo implements Serializable {
 	private String nm_cargo;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "cargo")
+	@OneToMany(mappedBy = "cargo",cascade=CascadeType.ALL)
 	private List<Funcionario> funcionarios = new ArrayList<>();
 
 	public Cargo() {
@@ -36,14 +37,6 @@ public class Cargo implements Serializable {
 		this.nm_cargo = nm_cargo;
 
 	}
-
-	// public List<Funcionario>getFuncionarios(){
-	// return funcionario;
-	// }
-
-	// public void setFuncionario(List<Funcionario>funcionarios) {
-	// this.funcionario = funcionarios;
-	// }
 
 	public Integer getCd_cargo() {
 		return cd_cargo;
