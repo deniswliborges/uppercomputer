@@ -33,6 +33,7 @@ public class DBService {
 		Cargo c6 = new Cargo(null, "SECURITY");
 		Cargo c7 = new Cargo(null, "SQUAD");
 		Cargo c8 = new Cargo(null, "MARKET");
+		
 
 		// FERRAMENTAS GERENTE DE PROJETO
 		Ferramenta ferr1 = new Ferramenta(null, "Artia", "7.3");
