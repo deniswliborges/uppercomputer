@@ -1,13 +1,26 @@
 package com.deniswillian.uppercomputer.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Equipe implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cd_equipe;
 	private String nome;
+
+	@OneToMany(mappedBy = "equipe")
+	private List<Ferramenta> ferramentas = new ArrayList<>();
 
 	public Equipe() {
 	}
@@ -33,6 +46,18 @@ public class Equipe implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	
+
+	public List<Ferramenta> getFerramentas() {
+		return ferramentas;
+	}
+
+	public void setFerramentas(List<Ferramenta> ferramentas) {
+		this.ferramentas = ferramentas;
+	}
+	
+	
 
 	@Override
 	public int hashCode() {

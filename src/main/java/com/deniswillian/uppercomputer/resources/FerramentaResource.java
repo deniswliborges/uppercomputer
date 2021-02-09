@@ -24,23 +24,22 @@ import com.deniswillian.uppercomputer.services.FerramentaService;
 @RestController
 @RequestMapping(value = "/ferramentas")
 public class FerramentaResource {
-	
+
 	@Autowired
 	private FerramentaService ferramentaService;
-	
+
 	@RequestMapping(value = "/{cd_ferramenta}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer cd_ferramenta) {
 		Ferramenta obj = ferramentaService.find(cd_ferramenta);
 		return ResponseEntity.ok().body(obj);
 	}
 
-	/*
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody FerramentaDTO objDto) {
 		Ferramenta obj = ferramentaService.fromDTO(objDto);
 		obj = ferramentaService.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cd_ferramenta}").buildAndExpand(obj.getCd_ferramenta())
-				.toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cd_ferramenta}")
+				.buildAndExpand(obj.getCd_ferramenta()).toUri();
 		return ResponseEntity.created(uri).build();
 
 	}
@@ -59,7 +58,6 @@ public class FerramentaResource {
 		ferramentaService.delete(cd_ferramenta);
 		return ResponseEntity.noContent().build();
 	}
-	*/
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<FerramentaDTO>> findAll() {
@@ -68,7 +66,6 @@ public class FerramentaResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 
-	/*
 	// Paginação Exemplo - /cargos/page?linesPerPage=3&page=1&direction=ASC
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<FerramentaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -79,5 +76,5 @@ public class FerramentaResource {
 		Page<FerramentaDTO> listDto = list.map(obj -> new FerramentaDTO(obj));
 		return ResponseEntity.ok().body(listDto);
 	}
-	*/
+
 }

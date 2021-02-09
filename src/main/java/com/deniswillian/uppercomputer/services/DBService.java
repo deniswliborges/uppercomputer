@@ -6,24 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deniswillian.uppercomputer.domain.Cargo;
+import com.deniswillian.uppercomputer.domain.Equipe;
 import com.deniswillian.uppercomputer.domain.Ferramenta;
 import com.deniswillian.uppercomputer.domain.Funcionario;
 import com.deniswillian.uppercomputer.enums.TipoFuncionario;
 import com.deniswillian.uppercomputer.repositories.CargoRepository;
+import com.deniswillian.uppercomputer.repositories.EquipeRepository;
 import com.deniswillian.uppercomputer.repositories.FerramentaRepository;
 import com.deniswillian.uppercomputer.repositories.FuncionarioRepository;
 
 @Service
 public class DBService {
+
 	
-	@Autowired
-	private FuncionarioRepository funcionarioRepository;
 	@Autowired
 	private CargoRepository cargoRepository;
 	@Autowired
+	private FuncionarioRepository funcionarioRepository;
+	@Autowired
+	private EquipeRepository equipeRepository;
+	@Autowired
 	private FerramentaRepository ferramentaRepository;
 	
-	//Criando retorno instantiateTestDatabase(){} para criar o service para criação do banco de dados. Obs: Olhar na class TestConfig
+
+	// Criando retorno instantiateTestDatabase(){} para criar o service para criação
+	// do banco de dados. Obs: Olhar na class TestConfig
 	public void instantiateTestDatabase() {
 		Cargo c1 = new Cargo(null, "DEV");
 		Cargo c2 = new Cargo(null, "DBA");
@@ -31,34 +38,7 @@ public class DBService {
 		Cargo c4 = new Cargo(null, "MANAGER PROJECT");
 		Cargo c5 = new Cargo(null, "FIELFD SERVICE");
 		Cargo c6 = new Cargo(null, "SECURITY");
-		Cargo c7 = new Cargo(null, "SQUAD");
-		Cargo c8 = new Cargo(null, "MARKET");
 		
-
-		// FERRAMENTAS GERENTE DE PROJETO
-		Ferramenta ferr1 = new Ferramenta(null, "Artia", "7.3");
-		Ferramenta ferr2 = new Ferramenta(null, "Slack", "10.3");
-		Ferramenta ferr3 = new Ferramenta(null, "Podio", "2.5");
-		Ferramenta ferr4 = new Ferramenta(null, "Asana", "1.7");
-
-		// FERRAMENTAS ANALISTA DE NEGÓCIO
-		Ferramenta ferr5 = new Ferramenta(null, "Conta Azul", "2.1");
-		Ferramenta ferr6 = new Ferramenta(null, "Service Now", "7.1");
-		Ferramenta ferr7 = new Ferramenta(null, "QuickBooks'", "20.9");
-		Ferramenta ferr8 = new Ferramenta(null, "Trello", "2020.13");
-
-		// FERRAMENTAS ANALISTA BANCO DE DADOS
-		Ferramenta ferr9 = new Ferramenta(null, "Oracle 11g", "11.2");
-		Ferramenta ferr10 = new Ferramenta(null, "MongoDB", "7.3");
-		Ferramenta ferr11 = new Ferramenta(null, "SQL Server", "7.3");
-		Ferramenta ferr12 = new Ferramenta(null, "PostgreSQL 2012 R2", "9.6");
-
-		// FERRAMENTAS ANALISTA DE DESENVOLVIMENTO
-		Ferramenta ferr13 = new Ferramenta(null, "Android Studio", "3.6");
-		Ferramenta ferr14 = new Ferramenta(null, "SpringBoot", "4.2");
-		Ferramenta ferr15 = new Ferramenta(null, "Eclypse", "7.3");
-		Ferramenta ferr16 = new Ferramenta(null, "GitKraken", "7.3");
-
 		Funcionario f1 = new Funcionario(null, "Denis Willian", "96458754-x", "548657459-41", "denis@gmail.com",
 				6500.00, "123", "Rua Flores", "300", "apto 303 ", " Jardins", "38220834", c1,
 				TipoFuncionario.DESENVOLVEDOR);
@@ -77,17 +57,58 @@ public class DBService {
 				"123", "Alamenda Tocantins", "26", "casa 3", "Vila Morumbi", "281777012", c4,
 				TipoFuncionario.GER_PROJETO);
 		f4.getTelefones().addAll(Arrays.asList("962110455"));
-
+			
+		
 		c1.getFuncionarios().addAll(Arrays.asList(f1));
 		c2.getFuncionarios().addAll(Arrays.asList(f2));
 		c3.getFuncionarios().addAll(Arrays.asList(f3));
 		c4.getFuncionarios().addAll(Arrays.asList(f4));
-
-		cargoRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8));
+		
+		cargoRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6));
 		funcionarioRepository.saveAll(Arrays.asList(f1, f2, f3, f4));
 
+		Equipe eq1 = new Equipe(null, "Development");
+		Equipe eq2 = new Equipe(null, "Database");
+		Equipe eq3 = new Equipe(null, "Management");
+		Equipe eq4 = new Equipe(null, "Business Analyst");
+		Equipe eq5 = new Equipe(null, "Technical Support");
+		Equipe eq6 = new Equipe(null, "Security Information");
+
+		// FERRAMENTAS GERENTE DE PROJETO(eq3)
+		Ferramenta ferr1 = new Ferramenta(null, "Artia", "7.3", eq3);
+		Ferramenta ferr2 = new Ferramenta(null, "Slack", "10.3", eq3);
+		Ferramenta ferr3 = new Ferramenta(null, "Podio", "2.5", eq3);
+		Ferramenta ferr4 = new Ferramenta(null, "Asana", "1.7", eq3);
+
+		// FERRAMENTAS ANALISTA DE NEGÓCIO(eq4)
+		Ferramenta ferr5 = new Ferramenta(null, "Conta Azul", "2.1", eq4);
+		Ferramenta ferr6 = new Ferramenta(null, "Service Now", "7.1", eq4);
+		Ferramenta ferr7 = new Ferramenta(null, "QuickBooks'", "20.9", eq4);
+		Ferramenta ferr8 = new Ferramenta(null, "Trello", "2020.13", eq4);
+
+		// FERRAMENTAS ANALISTA BANCO DE DADOS(eq2)
+		Ferramenta ferr9 = new Ferramenta(null, "Oracle 11g", "11.2", eq2);
+		Ferramenta ferr10 = new Ferramenta(null, "MongoDB", "7.3", eq2);
+		Ferramenta ferr11 = new Ferramenta(null, "SQL Server", "7.3", eq2);
+		Ferramenta ferr12 = new Ferramenta(null, "PostgreSQL 2012 R2", "9.6", eq2);
+
+		// FERRAMENTAS ANALISTA DE DESENVOLVIMENTO(eq1)
+		Ferramenta ferr13 = new Ferramenta(null, "Android Studio", "3.6", eq1);
+		Ferramenta ferr14 = new Ferramenta(null, "SpringBoot", "4.2", eq1);
+		Ferramenta ferr15 = new Ferramenta(null, "Eclypse", "7.3", eq1);
+		Ferramenta ferr16 = new Ferramenta(null, "GitKraken", "7.3", eq1);
+
+		eq1.getFerramentas().addAll(Arrays.asList(ferr13, ferr14, ferr15, ferr16));
+		eq2.getFerramentas().addAll(Arrays.asList(ferr9, ferr10, ferr11, ferr12));
+		eq3.getFerramentas().addAll(Arrays.asList(ferr1, ferr2, ferr3, ferr4));
+		eq4.getFerramentas().addAll(Arrays.asList(ferr5, ferr6, ferr7, ferr8));
+		
+		equipeRepository.saveAll(Arrays.asList(eq1, eq2, eq3, eq4, eq5, eq6));
+		
 		ferramentaRepository.saveAll(Arrays.asList(ferr1, ferr2, ferr3, ferr4, ferr5, ferr5, ferr6, ferr7, ferr8, ferr9,
-				ferr10, ferr11, ferr12, ferr13, ferr14, ferr15, ferr16));	
+				ferr10, ferr11, ferr12, ferr13, ferr14, ferr15, ferr16));
+
+		
 	}
 
 }

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import com.deniswillian.uppercomputer.domain.Cargo;
 import com.deniswillian.uppercomputer.domain.Endereco;
 import com.deniswillian.uppercomputer.domain.Funcionario;
-import com.deniswillian.uppercomputer.dto.CargoDTO;
 import com.deniswillian.uppercomputer.dto.FuncionarioDTO;
 import com.deniswillian.uppercomputer.dto.FuncionarioNewDTO;
 import com.deniswillian.uppercomputer.enums.TipoFuncionario;
@@ -61,16 +60,7 @@ public class FuncionarioService {
 
 	}
 
-	public Page<Funcionario> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return funcionarioRepository.findAll(pageRequest);
-
-	}
-
-	public Funcionario fromDTO(FuncionarioDTO objDto) {
-		return new Funcionario(objDto.getCd_func(), objDto.getNm_func(), null, null, objDto.getEmail_func(), 0, null,
-				null,null,null,null,null,null,null);
-	}
+	
 
 	private void updateData(Funcionario newObj, Funcionario obj) {
 		newObj.setNm_func(obj.getNm_func());
@@ -106,6 +96,21 @@ public class FuncionarioService {
 			cli.getTelefones().add(objDto.getTelefone3());
 		}
 		return cli;
+	}
+	
+	public Page<Funcionario> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return funcionarioRepository.findAll(pageRequest);
+
+	}
+
+	public Funcionario fromDTO(FuncionarioDTO objDto) {	
+		
+		//Cargo cargo = new Cargo(objDto.getCargoId(), null);
+		Funcionario func = new Funcionario(null, objDto.getNm_func(), null, null, objDto.getEmail_func(), 0, null, null, null, null, null, null, objDto.getCargoId(), null);
+		
+		return func;
+		
 	}
 
 }

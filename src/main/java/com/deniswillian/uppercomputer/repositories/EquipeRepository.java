@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.deniswillian.uppercomputer.domain.Equipe;
 
-//@Repository
-public interface EquipeRepository  {
+@Repository
+public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
 
 }

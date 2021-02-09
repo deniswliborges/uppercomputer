@@ -3,6 +3,7 @@ package com.deniswillian.uppercomputer.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,7 @@ import com.deniswillian.uppercomputer.services.exceptions.DataIntegrityException
 @Service
 public class FerramentaService {
 	
+	@Autowired
 	private FerramentaRepository ferramentaRepository;
 	
 	
@@ -27,7 +29,7 @@ public class FerramentaService {
 				"Objeto não encontrado! Id: " + cd_ferramenta + ", Tipo: " + Ferramenta.class.getName()));
 	}
 
-	/*public Ferramenta insert(Ferramenta obj) {
+	public Ferramenta insert(Ferramenta obj) {
 		obj.setCd_ferramenta(null);
 		return ferramentaRepository.save(obj);
 	}
@@ -50,20 +52,20 @@ public class FerramentaService {
 			throw new DataIntegrityException("Não é possível excluir um Ferramenta que possui Funcionarios!");
 		}
 	}
-*/
+
 	public List<Ferramenta> findAll() {
 		return ferramentaRepository.findAll();
 
 	}
 
-	/*public Page<Ferramenta> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+	public Page<Ferramenta> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return ferramentaRepository.findAll(pageRequest);
 
 	}
 
 	public Ferramenta fromDTO(FerramentaDTO objDto) {
-		return new Ferramenta(objDto.getCd_ferramenta(), objDto.getNome(),objDto.getVs());
+		return new Ferramenta(objDto.getCd_ferramenta(), objDto.getNome(),objDto.getVs(),null);
 	}
-	*/
+	
 }
