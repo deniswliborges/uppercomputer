@@ -20,6 +20,7 @@ public class Ferramenta implements Serializable {
 	private String nome;
 	private String vs;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "equipe_id")
 	private Equipe equipe;

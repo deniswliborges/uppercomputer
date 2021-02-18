@@ -18,7 +18,6 @@ import com.deniswillian.uppercomputer.repositories.FuncionarioRepository;
 @Service
 public class DBService {
 
-	
 	@Autowired
 	private CargoRepository cargoRepository;
 	@Autowired
@@ -27,7 +26,6 @@ public class DBService {
 	private EquipeRepository equipeRepository;
 	@Autowired
 	private FerramentaRepository ferramentaRepository;
-	
 
 	// Criando retorno instantiateTestDatabase(){} para criar o service para criação
 	// do banco de dados. Obs: Olhar na class TestConfig
@@ -38,7 +36,7 @@ public class DBService {
 		Cargo c4 = new Cargo(null, "MANAGER PROJECT");
 		Cargo c5 = new Cargo(null, "FIELFD SERVICE");
 		Cargo c6 = new Cargo(null, "SECURITY");
-		
+
 		Funcionario f1 = new Funcionario(null, "Denis Willian", "96458754-x", "548657459-41", "denis@gmail.com",
 				6500.00, "123", "Rua Flores", "300", "apto 303 ", " Jardins", "38220834", c1,
 				TipoFuncionario.DESENVOLVEDOR);
@@ -57,13 +55,12 @@ public class DBService {
 				"123", "Alamenda Tocantins", "26", "casa 3", "Vila Morumbi", "281777012", c4,
 				TipoFuncionario.GER_PROJETO);
 		f4.getTelefones().addAll(Arrays.asList("962110455"));
-			
-		
+
 		c1.getFuncionarios().addAll(Arrays.asList(f1));
 		c2.getFuncionarios().addAll(Arrays.asList(f2));
 		c3.getFuncionarios().addAll(Arrays.asList(f3));
 		c4.getFuncionarios().addAll(Arrays.asList(f4));
-		
+
 		cargoRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6));
 		funcionarioRepository.saveAll(Arrays.asList(f1, f2, f3, f4));
 
@@ -102,13 +99,12 @@ public class DBService {
 		eq2.getFerramentas().addAll(Arrays.asList(ferr9, ferr10, ferr11, ferr12));
 		eq3.getFerramentas().addAll(Arrays.asList(ferr1, ferr2, ferr3, ferr4));
 		eq4.getFerramentas().addAll(Arrays.asList(ferr5, ferr6, ferr7, ferr8));
-		
+
 		equipeRepository.saveAll(Arrays.asList(eq1, eq2, eq3, eq4, eq5, eq6));
-		
+
 		ferramentaRepository.saveAll(Arrays.asList(ferr1, ferr2, ferr3, ferr4, ferr5, ferr5, ferr6, ferr7, ferr8, ferr9,
 				ferr10, ferr11, ferr12, ferr13, ferr14, ferr15, ferr16));
 
-		
 	}
 
 }

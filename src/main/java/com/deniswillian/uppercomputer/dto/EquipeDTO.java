@@ -1,11 +1,17 @@
 package com.deniswillian.uppercomputer.dto;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.deniswillian.uppercomputer.domain.Equipe;
 
 public class EquipeDTO {
 
 	private Integer cd_equipe;
 
+	@NotEmpty(message = "Preenchimento Obrigatório")
+	@Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 80 caracteres")
 	private String nome;
 
 	public EquipeDTO() {

@@ -44,6 +44,8 @@ public class FerramentaService {
 		newObj.setNome(obj.getNome());
 	}
 
+	
+	
 	public void delete(Integer cd_ferramenta) {
 		find(cd_ferramenta);
 		try {
