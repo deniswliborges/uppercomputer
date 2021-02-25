@@ -3,6 +3,7 @@ package com.deniswillian.uppercomputer.services;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.deniswillian.uppercomputer.domain.Cargo;
@@ -18,6 +19,8 @@ import com.deniswillian.uppercomputer.repositories.FuncionarioRepository;
 @Service
 public class DBService {
 
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	@Autowired
 	private CargoRepository cargoRepository;
 	@Autowired
@@ -38,21 +41,21 @@ public class DBService {
 		Cargo c6 = new Cargo(null, "SECURITY");
 
 		Funcionario f1 = new Funcionario(null, "Denis Willian", "96458754-x", "548657459-41", "denis@gmail.com",
-				6500.00, "123", "Rua Flores", "300", "apto 303 ", " Jardins", "38220834", c1,
+				6500.00, pe.encode("'123"), "Rua Flores", "300", "apto 303 ", " Jardins", "38220834", c1,
 				TipoFuncionario.DESENVOLVEDOR);
 		f1.getTelefones().addAll(Arrays.asList("963254456", "56215547"));
 
 		Funcionario f2 = new Funcionario(null, "Michel Gonçalves", "56985471-0", "451230562-47", "Michel@gmail.com",
-				10800.00, "123", "Avenida Matos", "105", "Sala 800", "Centro", "38777012", c2,
+				10800.00, pe.encode("'123"), "Avenida Matos", "105", "Sala 800", "Centro", "38777012", c2,
 				TipoFuncionario.ANAL_BANCO_DADOS);
 		f2.getTelefones().addAll(Arrays.asList("915246600", "45963522"));
 
 		Funcionario f3 = new Funcionario(null, "David Cayuella", "02354209-6", "548625419-12", "david@gmail", 4500.00,
-				"123", "Avenida Floriano", "2106", null, "Vila Andrade", "281777012", c3, TipoFuncionario.ANAL_NEGOCIO);
+				pe.encode("'123"), "Avenida Floriano", "2106", null, "Vila Andrade", "281777012", c3, TipoFuncionario.ANAL_NEGOCIO);
 		f3.getTelefones().addAll(Arrays.asList("962110455"));
 
 		Funcionario f4 = new Funcionario(null, "Andre Martins", "52145236-8", "478563256-52", "andre@gmail", 7250.00,
-				"123", "Alamenda Tocantins", "26", "casa 3", "Vila Morumbi", "281777012", c4,
+				pe.encode("'123"), "Alamenda Tocantins", "26", "casa 3", "Vila Morumbi", "281777012", c4,
 				TipoFuncionario.GER_PROJETO);
 		f4.getTelefones().addAll(Arrays.asList("962110455"));
 

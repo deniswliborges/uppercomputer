@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Timer;
 
+
 public class Projeto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -15,6 +16,9 @@ public class Projeto implements Serializable {
 	private Timer hr_prevista;
 	private Timer hr_real;
 
+	
+	
+	
 	public Projeto() {
 	}
 
