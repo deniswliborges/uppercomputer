@@ -2,6 +2,7 @@ package com.deniswillian.uppercomputer.enums;
 
 
 public enum Perfil {
+	// ROLE é exigência do Spring Security
 	ADMIN(1,"ROLE_ADMIN"),
 	CLIENTE(2,"ROLE_CLIENTE"),
 	GUEST(3,"ROLE_GUEST");

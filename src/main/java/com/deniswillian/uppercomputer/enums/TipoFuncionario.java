@@ -6,7 +6,9 @@ public enum TipoFuncionario {
 	DESENVOLVEDOR(1,"DEV"),
 	ANAL_BANCO_DADOS(2,"DBA"),
 	ANAL_NEGOCIO(3,"BI"),
-	GER_PROJETO(4,"MANAGER_PROJECT");
+	GER_PROJETO(4,"MANAGER_PROJECT"),
+	FIELD_SERVICE(5,"FIELD SERVICE"),
+	ANAL_SECURITY(6,"SECURITY");
 
 	private Integer cod;
 	private String descricao;

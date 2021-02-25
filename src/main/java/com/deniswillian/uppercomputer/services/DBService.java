@@ -10,6 +10,7 @@ import com.deniswillian.uppercomputer.domain.Cargo;
 import com.deniswillian.uppercomputer.domain.Equipe;
 import com.deniswillian.uppercomputer.domain.Ferramenta;
 import com.deniswillian.uppercomputer.domain.Funcionario;
+import com.deniswillian.uppercomputer.enums.Perfil;
 import com.deniswillian.uppercomputer.enums.TipoFuncionario;
 import com.deniswillian.uppercomputer.repositories.CargoRepository;
 import com.deniswillian.uppercomputer.repositories.EquipeRepository;
@@ -37,7 +38,7 @@ public class DBService {
 		Cargo c2 = new Cargo(null, "DBA");
 		Cargo c3 = new Cargo(null, "BI");
 		Cargo c4 = new Cargo(null, "MANAGER PROJECT");
-		Cargo c5 = new Cargo(null, "FIELFD SERVICE");
+		Cargo c5 = new Cargo(null, "FIELD SERVICE");
 		Cargo c6 = new Cargo(null, "SECURITY");
 
 		Funcionario f1 = new Funcionario(null, "Denis Willian", "96458754-x", "548657459-41", "denis@gmail.com",
@@ -58,14 +59,28 @@ public class DBService {
 				pe.encode("'123"), "Alamenda Tocantins", "26", "casa 3", "Vila Morumbi", "281777012", c4,
 				TipoFuncionario.GER_PROJETO);
 		f4.getTelefones().addAll(Arrays.asList("962110455"));
+		
+		Funcionario f5 = new Funcionario(null, "Wagner Moura", "95563201-x", "632854445-21", "wagner@gmail.com",
+				22650.00, pe.encode("'123"), "Rua Djalma", "30", "casa 2 ", " Tatuape", "55845236", c5,
+				TipoFuncionario.ANAL_SECURITY);
+		f5.getTelefones().addAll(Arrays.asList("996529963", "55201022"));
+		
+		Funcionario f6 = new Funcionario(null, "Marco Neri", "32452362-x", "03251452-63", "marco@gmail.com",
+				6500.00, pe.encode("'123"), "Alameda Victor Bueno", "04", "apto 4 ", "Bertioga", "33625478", c6,
+				TipoFuncionario.FIELD_SERVICE);
+		f6.getTelefones().addAll(Arrays.asList("977854412", "25412365"));
+		// Adicionado o colaborador como ADM para realizar CRUDs restritos
+		f6.addPerfil(Perfil.ADMIN);
 
 		c1.getFuncionarios().addAll(Arrays.asList(f1));
 		c2.getFuncionarios().addAll(Arrays.asList(f2));
 		c3.getFuncionarios().addAll(Arrays.asList(f3));
 		c4.getFuncionarios().addAll(Arrays.asList(f4));
+		c5.getFuncionarios().addAll(Arrays.asList(f6));
+		c6.getFuncionarios().addAll(Arrays.asList(f5));
 
 		cargoRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6));
-		funcionarioRepository.saveAll(Arrays.asList(f1, f2, f3, f4));
+		funcionarioRepository.saveAll(Arrays.asList(f1, f2, f3, f4,f5,f6));
 
 		Equipe eq1 = new Equipe(null, "Development");
 		Equipe eq2 = new Equipe(null, "Database");

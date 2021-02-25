@@ -1,24 +1,22 @@
 package com.deniswillian.uppercomputer.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-
+import com.deniswillian.uppercomputer.enums.Perfil;
 import com.deniswillian.uppercomputer.enums.TipoFuncionario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -65,7 +63,14 @@ public class Funcionario implements Serializable {
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 
+	//Configurando para incluir a class Perfil para as permissões de cada Funcionario
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+	
+	// Todo colaborador tem perfil de cliente e as regras de negócio sobre as permissões de ADM ou Guest é atribuido no DBService 
 	public Funcionario() {
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	/*
@@ -92,6 +97,7 @@ public class Funcionario implements Serializable {
 		this.cep = cep;
 		this.cargo = cargo;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
+		addPerfil(Perfil.CLIENTE);
 		
 	}
 
@@ -215,6 +221,15 @@ public class Funcionario implements Serializable {
 
 	public void setTipo(TipoFuncionario tipo) {
 		this.tipo = tipo.getCod();
+	}
+	
+	//Buscando os perfis e convertendo o Integer(1,2,3, etc) para a descrição do código 
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 	
 	@Override
