@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -50,23 +51,34 @@ public class Funcionario implements Serializable {
 	private String complemento;
 	private String bairro;
 	private String cep;
-	
 	private Integer tipo;
 	
+	
 
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "cd_cargo")
 	private Cargo cargo;
 
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "Equipe_id")
+	private Equipe equipe;
+	
+	
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 
+	
+	
 	//Configurando para incluir a class Perfil para as permissões de cada Funcionario
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
+	
+	
 	
 	// Todo colaborador tem perfil de cliente e as regras de negócio sobre as permissões de ADM ou Guest é atribuido no DBService 
 	public Funcionario() {
@@ -81,7 +93,7 @@ public class Funcionario implements Serializable {
 
 	public Funcionario(Integer cd_func, String nm_func, String rg_fun, String cpf_func, String email_func,
 			double salario, String senha, String logradouro, String numero, String complemento, String bairro, String cep,
-			Cargo cargo,TipoFuncionario tipo) {
+			Cargo cargo,TipoFuncionario tipo, Equipe equipe) {
 		super();
 		this.cd_func = cd_func;
 		this.nm_func = nm_func;
@@ -97,6 +109,7 @@ public class Funcionario implements Serializable {
 		this.cep = cep;
 		this.cargo = cargo;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
+		this.equipe = equipe;
 		addPerfil(Perfil.CLIENTE);
 		
 	}
@@ -213,6 +226,15 @@ public class Funcionario implements Serializable {
 
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
+	}
+	
+	
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
 	}
 
 	public TipoFuncionario getTipo() {

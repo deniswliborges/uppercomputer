@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Equipe implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +23,10 @@ public class Equipe implements Serializable {
 
 	@OneToMany(mappedBy = "equipe")
 	private List<Ferramenta> ferramentas = new ArrayList<>();
+	
+	
+	@OneToMany(mappedBy = "equipe")	
+	private List<Funcionario> funcionarios = new ArrayList<>();
 
 	public Equipe() {
 	}
@@ -58,6 +64,14 @@ public class Equipe implements Serializable {
 	}
 	
 	
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
 
 	@Override
 	public int hashCode() {

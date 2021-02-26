@@ -19,6 +19,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.deniswillian.uppercomputer.security.JWTAuthenticationFilter;
+import com.deniswillian.uppercomputer.security.JWTUtil;
+
 
 
 @Configuration
@@ -29,6 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	@Autowired
+	private JWTUtil jwtUtil;
+	
 	//Liberar acesso no ambiente de test que utiliza Banco H2
 	@Autowired
 	private Environment env;
@@ -38,6 +44,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
 
 	private static final String[] PUBLIC_MATCHERS_GET = { "/cargos/**", "/equipes/**", "/ferramentas/**", "/funcionarios/**"};
+	
+	private static final String[] PUBLIC_MATCHERS_POST = {
+			"/funcionarios/**",
+			"/auth/forgot/**"
+	};
 
 	//Comando para liberar o acesso ao Banco de dados atrelado Ambiente de Test. Pode alterar para ambiente de DEV se preferir
 	@Override
@@ -50,13 +61,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// CONFIGURAÇÃO PARA DESABILITAR ATAQUES CSRF DEVIDO ARMAZENAMENTO SER POR SEÇÃO
 		http.cors().and().csrf().disable();
 		http.authorizeRequests()
-				// .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
+				 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
 				.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll().antMatchers(PUBLIC_MATCHERS).permitAll()
 				.anyRequest().authenticated();
-		// http.addFilter(new JWTAuthenticationFilter(authenticationManager(),
-		// jwtUtil));
+		http.addFilter(new JWTAuthenticationFilter(authenticationManager(),jwtUtil));
 		// http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil,
-		// userDetailsService));											//Stateless não cria seção de usuário
+		//userDetailsService));											//Stateless não cria seção de usuário
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	

@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.deniswillian.uppercomputer.domain.Cargo;
+import com.deniswillian.uppercomputer.domain.Equipe;
 import com.deniswillian.uppercomputer.domain.Funcionario;
 
 public class FuncionarioDTO implements Serializable {
@@ -22,8 +23,9 @@ public class FuncionarioDTO implements Serializable {
 	@NotEmpty(message = "Preenchimento Obrigatório")
 	@Email(message = "Preenchimento Obrigatório")
 	private String email_func;
-	
+
 	private Cargo cargoId;
+	private Equipe equipeId;
 
 	public FuncionarioDTO() {
 	}
@@ -33,7 +35,7 @@ public class FuncionarioDTO implements Serializable {
 		nm_func = obj.getNm_func();
 		email_func = obj.getEmail_func();
 		setCargoId(obj.getCargo());
-
+		setEquipeId(obj.getEquipe());
 	}
 
 	public Integer getCd_func() {
@@ -67,8 +69,11 @@ public class FuncionarioDTO implements Serializable {
 	public void setCargoId(Cargo cargoId) {
 		this.cargoId = cargoId;
 	}
+	public Equipe getEquipeId() {
+		return equipeId;
+	}
 
-
-	
-
+	public void setEquipeId(Equipe equipeId) {
+		this.equipeId = equipeId;
+	}
 }

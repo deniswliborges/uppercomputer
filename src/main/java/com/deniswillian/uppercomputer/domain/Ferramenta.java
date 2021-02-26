@@ -59,8 +59,7 @@ public class Ferramenta implements Serializable {
 	public void setVs(String vs) {
 		this.vs = vs;
 	}
-	
-	
+		
 
 	public Equipe getEquipe() {
 		return equipe;

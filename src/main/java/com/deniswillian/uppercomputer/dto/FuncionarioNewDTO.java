@@ -45,6 +45,8 @@ public class FuncionarioNewDTO implements Serializable {
 
 	private String telefone2;
 	private String telefone3;
+	
+	private Integer equipe;
 
 	public FuncionarioNewDTO() {
 	}
@@ -175,6 +177,14 @@ public class FuncionarioNewDTO implements Serializable {
 
 	public void setTelefone3(String telefone3) {
 		this.telefone3 = telefone3;
+	}
+
+	public Integer getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Integer equipe) {
+		this.equipe = equipe;
 	}
 
 }
