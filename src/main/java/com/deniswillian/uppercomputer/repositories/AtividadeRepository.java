@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.deniswillian.uppercomputer.domain.Atividade;
 
-//@Repository
-public interface AtividadeRepository {
+
+public interface AtividadeRepository  {
 
 }

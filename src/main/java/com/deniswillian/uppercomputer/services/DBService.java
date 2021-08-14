@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.deniswillian.uppercomputer.domain.Atividade;
 import com.deniswillian.uppercomputer.domain.Cargo;
 import com.deniswillian.uppercomputer.domain.Equipe;
 import com.deniswillian.uppercomputer.domain.Ferramenta;
@@ -47,6 +48,11 @@ public class DBService {
 		Equipe eq4 = new Equipe(null, "Business Analyst");
 		Equipe eq5 = new Equipe(null, "Technical Support");
 		Equipe eq6 = new Equipe(null, "Security Information");
+		
+		//Atividade at = new Atividade(1, "correr", "Resolvido");
+		
+		//System.out.println(at.getNome() + " + "+at.getCd_atividade() + at.getStatus());
+		
 
 		Funcionario f1 = new Funcionario(null, "Denis Willian", "96458754-x", "548657459-41", "denis@gmail.com",
 				6500.00, pe.encode("'123"), "Rua Flores", "300", "apto 303 ", " Jardins", "38220834", c1,
