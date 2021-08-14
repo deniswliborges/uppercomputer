@@ -20,6 +20,8 @@ public class Atividade implements Serializable {
 	//@Column(name = "NOME")
 	private String nome;
 	
+	
+	
 	//@Column(name = "STATUS")
 	private String status;
 
